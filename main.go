@@ -14,5 +14,5 @@ func main() {
 	if err != nil {
 		fmt.Print(parser.Usage(err))
 	}
-	fmt.Println(*expr)
+	fmt.Println(Parse(*expr))
 }
