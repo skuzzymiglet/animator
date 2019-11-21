@@ -1,3 +1,0 @@
-synopsis
-
-(name) [OPTIONS] -i [frames] -e [expression] [output_options] -o [output_file]
