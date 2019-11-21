@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	name := "goanimate"
+	name := "animator"
 	parser := argparse.NewParser(name, "command-line animation toolkit")
 	expr := parser.String("e", "expr", &argparse.Options{Required: true, Help: "Expression"})
 	err := parser.Parse(os.Args)
