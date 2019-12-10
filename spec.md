@@ -1,4 +1,4 @@
-﻿# args
+﻿#args
 
 `animator -i [FRAMES] -e [EXPRESSION] -o [OUTPUT]`
 
@@ -38,7 +38,7 @@ Using expression
 `1<4>2`: 1 to 2 in 4 frames
 `1<p>2`: 1 to 2 as if it were `png`
 `1<p3>2`: 1 to 2 in 3 frames as if it were `png`
-
+`1<<3>>8`: 1 to 8, all interpolations in 3 frames
 # import
 
 + expressions:
