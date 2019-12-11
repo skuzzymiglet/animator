@@ -1,4 +1,4 @@
-﻿#args
+﻿# args
 
 `animator -i [FRAMES] -e [EXPRESSION] -o [OUTPUT]`
 
