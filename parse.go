@@ -7,6 +7,11 @@ import (
 	"strings"
 )
 
+type rule struct {
+	re     string
+	expand func([]byte) []byte
+}
+
 func expandRange(inText []byte) []byte {
 	s := ""
 	text := string(inText)
@@ -31,7 +36,28 @@ func expandRange(inText []byte) []byte {
 	return []byte(s)
 }
 
-func replaceRange(s string) string {
-	search := regexp.MustCompile("[0-9]+\\-[0-9]+")
-	return string(search.ReplaceAllFunc([]byte(s), expandRange))
+func expandRepeat(inText []byte) []byte {
+	s := ""
+	text := string(inText)
+	timesString := regexp.MustCompile("(\\d+)\\(.+\\)").FindStringSubmatch(text)[1]
+	times, _ := strconv.Atoi(timesString)
+	if times == 0 {
+		return inText
+	}
+	inside := regexp.MustCompile("\\d+\\((.+)\\)").FindStringSubmatch(text)[1]
+	for i := 0; i != times; i += 1 {
+		s += inside
+		if i != times-1 {
+			s += ","
+		}
+	}
+	return []byte(s)
+}
+
+func replaceAll(s string) string {
+	rules := []rule{rule{"[0-9]+\\-[0-9]+", expandRange}, rule{"\\d+\\(.+\\)", expandRepeat}}
+	for r := range rules {
+		s = string(regexp.MustCompile(rules[r].re).ReplaceAllFunc([]byte(s), rules[r].expand))
+	}
+	return s
 }
