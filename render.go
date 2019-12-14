@@ -1,11 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
-	"os/exec"
 	"strconv"
-	"strings"
 )
 
 func Render(mainExpr string, otherFrames map[string][]float64) string {

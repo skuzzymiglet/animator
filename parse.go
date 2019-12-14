@@ -54,7 +54,7 @@ func expandRepeat(inText []byte) []byte {
 	return []byte(s)
 }
 
-func replaceAll(s string) string {
+func ReplaceAll(s string) string {
 	rules := []rule{rule{"[0-9]+\\-[0-9]+", expandRange}, rule{"\\d+\\(.+\\)", expandRepeat}}
 	for r := range rules {
 		s = string(regexp.MustCompile(rules[r].re).ReplaceAllFunc([]byte(s), rules[r].expand))
