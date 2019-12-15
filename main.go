@@ -19,7 +19,7 @@ func testRender() {
 	other["o0.jpg"] = []float64{0, 0.1}
 	other["o1.jpg"] = []float64{0.1, 0.4}
 	other["o3.webm"] = []float64{1, 3}
-	fmt.Println(Render(main, other))
+	fmt.Println(Render(main, other, "hello.webm"))
 }
 
 func main() {
