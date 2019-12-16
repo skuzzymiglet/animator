@@ -10,13 +10,12 @@ import (
 type rule struct {
 	// Replacement Rule
 	re     string              // What to search for
-	expand func([]byte) []byte // What to do on it (replaceAllFunc)
+	expand func(string) string // What to do on it (replaceAllFunc)
 }
 
-func expandRange(inText []byte) []byte {
+func expandRange(text string) string {
 	// Expand range e.g. 4-7, into comma separated e.g 4,5,6,7
 	s := ""
-	text := string(inText)
 	start, serr := strconv.Atoi(strings.Split(text, "-")[0]) // 4-7 -> 4
 	end, eerr := strconv.Atoi(strings.Split(text, "-")[1])   // 4-7 -> 7
 	if serr != nil || eerr != nil {
@@ -37,19 +36,18 @@ func expandRange(inText []byte) []byte {
 			s += strconv.Itoa(i) + ","
 		}
 	}
-	return []byte(s)
+	return s
 }
 
-func expandRepeat(inText []byte) []byte {
+func expandRepeat(text string) string {
 	// Expand repeat e.g 4(3), into comma separated e.g 3,3,3,3
 	s := ""
-	text := string(inText)
 	timesString := regexp.MustCompile("(\\d+)\\(.+\\)").FindStringSubmatch(text)[1] // 6(7-90) -> 6
 	times, _ := strconv.Atoi(timesString)
 	// do not do 0 times (repeat till end)
 	// TODO expandRepeatTillEnd
 	if times == 0 {
-		return inText
+		return text
 	}
 
 	inside := regexp.MustCompile("\\d+\\((.+)\\)").FindStringSubmatch(text)[1] // 6(7-90) -> 7-90
@@ -60,7 +58,7 @@ func expandRepeat(inText []byte) []byte {
 			s += ","
 		}
 	}
-	return []byte(s)
+	return s
 }
 
 func ReplaceAll(s string) string {
@@ -70,13 +68,12 @@ func ReplaceAll(s string) string {
 		rule{"\\d+\\([^\\)]+\\)", expandRepeat},
 	}
 	for r := range rules {
-		s = string(regexp.MustCompile(rules[r].re).ReplaceAllFunc([]byte(s), rules[r].expand))
+		s = string(regexp.MustCompile(rules[r].re).ReplaceAllStringFunc(s, rules[r].expand))
 	}
 	return s
 }
 
 func Files(s string, files []string) string {
-
 	re := regexp.MustCompile("\\d+")
 	s = re.ReplaceAllStringFunc(s, func(index string) string {
 		i, _ := strconv.Atoi(index)
