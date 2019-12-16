@@ -54,7 +54,7 @@ func expandRepeat(inText []byte) []byte {
 
 	inside := regexp.MustCompile("\\d+\\((.+)\\)").FindStringSubmatch(text)[1] // 6(7-90) -> 7-90
 	// append inside to returning string `times` times
-	for i := 0; i != times; i += 1 {
+	for i := 0; i != times; i++ {
 		s += inside
 		if i != times-1 {
 			s += ","
@@ -65,9 +65,22 @@ func expandRepeat(inText []byte) []byte {
 
 func ReplaceAll(s string) string {
 	// Replace (expand?) all according to a list of `rule`s
-	rules := []rule{rule{"[0-9]+\\-[0-9]+", expandRange}, rule{"\\d+\\([^\\)]+\\)", expandRepeat}}
+	rules := []rule{
+		rule{"[0-9]+\\-[0-9]+", expandRange},
+		rule{"\\d+\\([^\\)]+\\)", expandRepeat},
+	}
 	for r := range rules {
 		s = string(regexp.MustCompile(rules[r].re).ReplaceAllFunc([]byte(s), rules[r].expand))
 	}
+	return s
+}
+
+func Files(s string, files []string) string {
+
+	re := regexp.MustCompile("\\d+")
+	s = re.ReplaceAllStringFunc(s, func(index string) string {
+		i, _ := strconv.Atoi(index)
+		return fmt.Sprintf("%q", files[i-1])
+	})
 	return s
 }

@@ -10,6 +10,7 @@ func testParse() {
 	fmt.Println("Parse Test")
 	fmt.Println(ReplaceAll("8(5-10,7),7(7-10)"))
 	fmt.Println(ReplaceAll("[3(7-9)][4,2(6-10)]"))
+	fmt.Println(Files("1,2,3", []string{"x.jpg", "y.png", "z.webm", "f.d"}))
 }
 
 func testRender() {
