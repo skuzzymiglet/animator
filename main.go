@@ -15,10 +15,6 @@ func testParse() {
 	fmt.Println(StringToTimeline(Files(ReplaceAll("[3(1-3)][4,2(2-4)]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"})))
 }
 
-func allOps(s string, files []string) [][]string {
-	return StringToTimeline(Files(ReplaceAll(s), files))
-}
-
 func testRender() {
 	fmt.Println("Render Test")
 	main := "i%2d.jpg"
@@ -35,9 +31,10 @@ func main() {
 	name := "animator"
 	parser := argparse.NewParser(name, "command-line animation toolkit")
 	expr := parser.String("e", "expr", &argparse.Options{Required: true, Help: "Expression"})
+	files := parser.List("f", "files", &argparse.Options{Required: true, Help: "List of input files"})
 	err := parser.Parse(os.Args)
 	if err != nil {
 		fmt.Print(parser.Usage(err))
 	}
-	fmt.Println(ReplaceAll(*expr))
+	fmt.Println(StringToTimeline(Files(ReplaceAll(*expr), *files)))
 }
