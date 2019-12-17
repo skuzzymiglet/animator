@@ -81,3 +81,13 @@ func Files(s string, files []string) string {
 	})
 	return s
 }
+
+func StringToTimeline(s string) [][]string {
+	re := regexp.MustCompile("\\[([^\\]]+)\\]")
+	matches := re.FindAllString(s, -1)
+	timeline := [][]string{}
+	for _, e := range matches {
+		timeline = append(timeline, strings.Split(e, ","))
+	}
+	return timeline
+}

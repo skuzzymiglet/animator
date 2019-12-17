@@ -12,6 +12,11 @@ func testParse() {
 	fmt.Println(ReplaceAll("[3(7-9)][4,2(6-10)]"))
 	fmt.Println(Files("1,2,3", []string{"x.jpg", "y.png", "z.webm", "f.d"}))
 	fmt.Println(Files(ReplaceAll("[3(1-3)][4,2(2-4)]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"}))
+	fmt.Println(StringToTimeline(Files(ReplaceAll("[3(1-3)][4,2(2-4)]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"})))
+}
+
+func allOps(s string, files []string) [][]string {
+	return StringToTimeline(Files(ReplaceAll(s), files))
 }
 
 func testRender() {
