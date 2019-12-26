@@ -84,10 +84,10 @@ func Files(s string, files []string) string {
 
 func StringToTimeline(s string) [][]string {
 	re := regexp.MustCompile("\\[([^\\]]+)\\]")
-	matches := re.FindAllString(s, -1)
+	matches := re.FindAllStringSubmatch(s, -1)
 	timeline := [][]string{}
 	for _, e := range matches {
-		timeline = append(timeline, strings.Split(e, ","))
+		timeline = append(timeline, strings.Split(e[1], ","))
 	}
 	return timeline
 }

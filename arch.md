@@ -1,0 +1,3 @@
+``` sequence-diagrams
+options: ree
+```
