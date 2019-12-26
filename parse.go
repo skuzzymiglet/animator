@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"regexp"
 	"strconv"
 	"strings"
@@ -86,8 +87,17 @@ func StringToTimeline(s string) [][]string {
 	re := regexp.MustCompile("\\[([^\\]]+)\\]")
 	matches := re.FindAllStringSubmatch(s, -1)
 	timeline := [][]string{}
+	x := []string{}
 	for _, e := range matches {
-		timeline = append(timeline, strings.Split(e[1], ","))
+		x = strings.Split(e[1], ",")
+		for _, e := range x {
+			y, err := strconv.Unquote(e)
+			if err != nil {
+				log.Fatal(err)
+			}
+			timeline = append(timeline, []string{y})
+
+		}
 	}
 	return timeline
 }
