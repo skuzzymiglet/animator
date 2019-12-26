@@ -90,14 +90,21 @@ func StringToTimeline(s string) [][]string {
 	x := []string{}
 	for _, e := range matches {
 		x = strings.Split(e[1], ",")
-		for _, e := range x {
-			y, err := strconv.Unquote(e)
-			if err != nil {
-				log.Fatal(err)
+		for i, f := range x {
+			if f == "_" {
+				//timeline = append(timeline, []string{"bum"})
+				x[i] = ""
+			} else {
+				y, err := strconv.Unquote(f)
+				if err != nil {
+					fmt.Println("p")
+					log.Fatal(err)
+				}
+				//timeline = append(timeline, []string{y})
+				x[i] = y
 			}
-			timeline = append(timeline, []string{y})
-
 		}
+		timeline = append(timeline, x)
 	}
 	return timeline
 }
