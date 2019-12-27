@@ -17,7 +17,7 @@ func FrameNames(timeline [][]string, tmp string) [][]string {
 	return timeline
 }
 
-func FileOps(timeline [][]string) ([][]string, string, string) {
+func FileOps(timeline [][]string) [][]string {
 	dir, err := ioutil.TempDir("", "animator")
 	if err != nil {
 		log.Fatal(err)
@@ -25,5 +25,5 @@ func FileOps(timeline [][]string) ([][]string, string, string) {
 
 	timeline = FrameNames(timeline, dir)
 
-	return timeline, dir, ""
+	return timeline
 }

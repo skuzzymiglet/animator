@@ -5,6 +5,16 @@ import (
 	"strconv"
 )
 
+func TimelineToFrames(timeline [][]string, fps float64) map[string][]float64 {
+	frames := map[string][]float64{}
+	for _, x := range timeline {
+		for j, y := range x {
+			frames[y] = []float64{float64(j) / fps, (float64(j) / fps) + (1.0 / fps)}
+		}
+	}
+	return frames
+}
+
 func Render(otherFrames map[string][]float64, out string) string {
 	// Take a file pattern and a list of filenames and in-out times and return an `ffmpeg` command to turn them into an output file
 	otherExpr := ""

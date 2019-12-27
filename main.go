@@ -14,8 +14,11 @@ func testParse() {
 	fmt.Println(Files(ReplaceAll("[3(1-3)][4,2(2-4)]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"}))
 	fmt.Println(StringToTimeline(Files(ReplaceAll("[3(1-3)][4,2(2-4)]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"})))
 	fmt.Println("FileOps Test")
-	tl, _, _ := FileOps(StringToTimeline(Files(ReplaceAll("[3(1-3)][4,2(2-4),_]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"})))
+	tl := FileOps(StringToTimeline(Files(ReplaceAll("[3(1-3)][4,2(2-4),_]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"})))
 	fmt.Printf("%#v\n", tl)
+	frames := TimelineToFrames(tl, 30)
+	fmt.Println(frames)
+	fmt.Println(Render(frames, "f.webm"))
 }
 
 func testRender() {
