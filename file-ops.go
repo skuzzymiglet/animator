@@ -9,12 +9,12 @@ import (
 
 func FrameNames(timeline [][]string, tmp string) [][]string {
 	// make all paths absolute
-	// move coherent topline frames to mx.y
 	for i, line := range timeline {
 		for j, frame := range line {
 			timeline[i][j] = filepath.Join(string(tmp), string(frame))
 		}
 	}
+	// move coherent topline frames to mx.y
 	return timeline
 }
 
