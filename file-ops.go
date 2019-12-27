@@ -14,7 +14,6 @@ func FrameNames(timeline [][]string, tmp string) [][]string {
 			timeline[i][j] = filepath.Join(string(tmp), string(frame))
 		}
 	}
-	// move coherent topline frames to mx.y
 	return timeline
 }
 
