@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func Render(mainExpr string, otherFrames map[string][]float64, out string) string {
+func Render(otherFrames map[string][]float64, out string) string {
 	// Take a file pattern and a list of filenames and in-out times and return an `ffmpeg` command to turn them into an output file
 	otherExpr := ""
 
@@ -28,5 +28,5 @@ func Render(mainExpr string, otherFrames map[string][]float64, out string) strin
 		}
 	}
 	// format `ffmpeg` command
-	return fmt.Sprintf("ffmpeg -y -f image2 -pattern_type sequence -i %q %v -filter_complex %q -map \"[%v]\" %v", mainExpr, otherExpr, otherFilter, prev, out)
+	return fmt.Sprintf("ffmpeg -y -f image2 -pattern_type sequence -i %v -filter_complex %q -map \"[%v]\" %v", otherExpr, otherFilter, prev, out)
 }
