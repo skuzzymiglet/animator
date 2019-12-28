@@ -3,15 +3,22 @@ package main
 import (
 	"io/ioutil"
 	"log"
-	//"os"
+	"os"
 	"path/filepath"
 )
 
 func FrameNames(timeline [][]string, tmp string) [][]string {
 	// make all paths absolute
+	var newName string
 	for i, line := range timeline {
 		for j, frame := range line {
-			timeline[i][j] = filepath.Join(string(tmp), string(frame))
+			newName = filepath.Join(string(tmp), string(frame))
+			oldNameAbs, err := filepath.Abs(timeline[i][j])
+			if err != nil {
+				log.Fatal(err)
+			}
+			os.Symlink(oldNameAbs, newName)
+			timeline[i][j] = newName
 		}
 	}
 	return timeline
