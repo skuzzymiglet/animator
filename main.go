@@ -35,26 +35,28 @@ func testRender() {
 }
 
 func main() {
-	testParse()
-	testRender()
+	//testParse()
+	//testRender()
 	name := "animator"
+
 	parser := argparse.NewParser(name, "command-line animation toolkit")
 	expr := parser.String("e", "expr", &argparse.Options{Required: true, Help: "Expression"})
 	files := parser.List("f", "files", &argparse.Options{Required: true, Help: "List of input files"})
 	output := parser.String("o", "out", &argparse.Options{Required: true, Help: "Output file"})
 	fps := parser.Float("r", "rate", &argparse.Options{Required: false, Help: "Framerate", Default: 5.0})
+
 	err := parser.Parse(os.Args)
 	if err != nil {
 		fmt.Print(parser.Usage(err))
 	}
-	fmt.Println(*expr, *files, *output, *fps)
+
 	tl := FileOps(StringToTimeline(Files(ReplaceAll(*expr), *files)))
-	fmt.Printf("%#v\n", tl)
+	fmt.Printf("Timeline: %#v\n", tl)
 	frames := TimelineToFrames(tl, *fps)
-	fmt.Println(frames)
+	fmt.Println("Frames:", frames)
 	fields := strings.Split(Render(frames, *output), " ")
 	cmd := exec.Command(fields[0], fields[1:]...)
-	fmt.Println(cmd)
+	fmt.Println("Command", cmd)
 	out, err := cmd.Output()
 	fmt.Println(out)
 	log.Printf("error: %v", err)
