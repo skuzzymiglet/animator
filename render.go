@@ -38,5 +38,5 @@ func Render(otherFrames map[string][]float64, out string) string {
 		}
 	}
 	// format `ffmpeg` command
-	return fmt.Sprintf("ffmpeg -y -f image2 -pattern_type sequence -i %v -filter_complex %q -map \"[%v]\" %v", otherExpr, otherFilter, prev, out)
+	return fmt.Sprintf("ffmpeg -y -f image2 -pattern_type sequence %v -filter_complex %q -map \"[%v]\" %v", otherExpr, otherFilter, prev, out)
 }
