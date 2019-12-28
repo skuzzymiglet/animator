@@ -1,9 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/akamensky/argparse"
-	"log"
 	"os"
 	"os/exec"
 	"strings"
@@ -45,9 +45,9 @@ func main() {
 	output := parser.String("o", "out", &argparse.Options{Required: true, Help: "Output file"})
 	fps := parser.Float("r", "rate", &argparse.Options{Required: false, Help: "Framerate", Default: 5.0})
 
-	err := parser.Parse(os.Args)
-	if err != nil {
-		fmt.Print(parser.Usage(err))
+	parseErr := parser.Parse(os.Args)
+	if parseErr != nil {
+		fmt.Print(parser.Usage(parseErr))
 	}
 
 	tl := FileOps(StringToTimeline(Files(ReplaceAll(*expr), *files)))
@@ -57,7 +57,13 @@ func main() {
 	fields := strings.Split(Render(frames, *output), " ")
 	cmd := exec.Command(fields[0], fields[1:]...)
 	fmt.Println("Command", cmd)
-	out, err := cmd.Output()
-	fmt.Println(out)
-	log.Printf("error: %v", err)
+
+	var out bytes.Buffer
+	var err bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &err
+
+	x := cmd.Run()
+
+	fmt.Println(x, out.String(), err.String())
 }
