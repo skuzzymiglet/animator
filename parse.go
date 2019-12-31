@@ -64,6 +64,7 @@ func expandRepeat(text string) string {
 
 func ReplaceAll(s string) string {
 	// Replace (expand?) all according to a list of `rule`s
+	// TODO add [] to expr, so that StringToTimeline will parse everything in it
 	rules := []rule{
 		rule{"[0-9]+\\-[0-9]+", expandRange},
 		rule{"\\d+\\([^\\)]+\\)", expandRepeat},

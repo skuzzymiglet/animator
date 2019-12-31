@@ -5,6 +5,8 @@ import (
 	"strconv"
 )
 
+// TODO The map[string][]float64 structure used for frames and in-out times removes re-used frames, and must be replaced with a list of structs
+
 func TimelineToFrames(timeline [][]string, fps float64) map[string][]float64 {
 	frames := map[string][]float64{}
 	for _, x := range timeline {
