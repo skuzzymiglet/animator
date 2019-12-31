@@ -29,14 +29,14 @@ func Render(otherFrames map[string][]float64, out string) string {
 	count := 0
 	for _, v := range otherFrames {
 		// Add text to `filter_complex` overlay
-		count++
-		otherFilter += string(fmt.Sprintf("[%v][%v] overlay=0:0:enable='between(t,%v,%v)'", prev, count, v[0], v[1]))
+		otherFilter += string(fmt.Sprintf("[%v][%v]overlay=0:0:enable='between(t,%v,%v)'", prev, count, v[0], v[1]))
 		prev = "v" + strconv.Itoa(count)
 		otherFilter += fmt.Sprintf("[%v]", prev)
+		count++
 		if count != len(otherFrames) {
 			otherFilter += "," // No comma at end
 		}
 	}
 	// format `ffmpeg` command
-	return fmt.Sprintf("ffmpeg -y -f image2 -pattern_type sequence %v -filter_complex %q -map \"[%v]\" %v", otherExpr, otherFilter, prev, out)
+	return fmt.Sprintf("ffmpeg -y -f image2 -pattern_type sequence %v -filter_complex %v -map [%v] %v", otherExpr, otherFilter, prev, out)
 }

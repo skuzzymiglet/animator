@@ -49,7 +49,6 @@ func main() {
 	if parseErr != nil {
 		fmt.Print(parser.Usage(parseErr))
 	}
-
 	tl := FileOps(StringToTimeline(Files(ReplaceAll(*expr), *files)))
 	fmt.Printf("Timeline: %#v\n", tl)
 	frames := TimelineToFrames(tl, *fps)
