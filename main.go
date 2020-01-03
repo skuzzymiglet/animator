@@ -17,7 +17,8 @@ func testParse() {
 	fmt.Println(Files(ReplaceAll("[3(1-3)][4,2(2-4)]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"}))
 	fmt.Println(StringToTimeline(Files(ReplaceAll("[3(1-3)][4,2(2-4)]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"})))
 	fmt.Println("FileOps Test")
-	tl := FileOps(StringToTimeline(Files(ReplaceAll("[3(1-3)][4,2(2-4),_]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"})))
+	tl, tmp := FileOps(StringToTimeline(Files(ReplaceAll("[3(1-3)][4,2(2-4),_]"), []string{"hi.png", "me.png", "me.webm", "yeet.xcf"})))
+	defer os.RemoveAll(tmp)
 	fmt.Printf("%#v\n", tl)
 	frames := TimelineToFrames(tl, 30)
 	fmt.Println(frames)
@@ -49,7 +50,8 @@ func main() {
 	if parseErr != nil {
 		fmt.Print(parser.Usage(parseErr))
 	}
-	tl := FileOps(StringToTimeline(Files(ReplaceAll(*expr), *files)))
+	tl, tmp := FileOps(StringToTimeline(Files(ReplaceAll(*expr), *files)))
+	defer os.RemoveAll(tmp)
 	fmt.Printf("Timeline: %#v\n", tl)
 	frames := TimelineToFrames(tl, *fps)
 	fmt.Println("Frames:", frames)
