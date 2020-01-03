@@ -55,6 +55,7 @@ func main() {
 	fmt.Println("Frames:", frames)
 	fields := strings.Split(Render(frames, *output), " ")
 	cmd := exec.Command(fields[0], fields[1:]...)
+	fmt.Printf("Fields: %#v\n", fields)
 	fmt.Println("Command", cmd)
 
 	var out bytes.Buffer
