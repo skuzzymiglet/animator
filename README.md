@@ -1,8 +1,5 @@
 # animator
 
-[![Join the chat at https://gitter.im/animator-project/community](https://badges.gitter.im/animator-project/community.svg)](https://gitter.im/animator-project/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-
 A command-line animation program (in the making!)
 
 ## Installation
@@ -19,6 +16,12 @@ A command-line animation program (in the making!)
            -o|--out "<value>"
           [-r|--rate <float>]
 ```
+
+## Contribute!
+
+Fork and [![Join the chat at https://gitter.im/animator-project/community](https://badges.gitter.im/animator-project/community.svg)](https://gitter.im/animator-project/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)!
+
+Your contribution is valuable!
 
 ## Features I plan on adding
 
