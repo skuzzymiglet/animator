@@ -1,6 +1,8 @@
 # animator
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/e06189dc6eed0e5b975b/maintainability)](https://codeclimate.com/github/skuzzymiglet/animator/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e06189dc6eed0e5b975b/maintainability)](https://codeclimate.com/github/skuzzymiglet/animator/maintainability) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6c8327c1511843d1b9c62b635190a5fc)](https://www.codacy.com/manual/skuzzymiglet/animator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=skuzzymiglet/animator&amp;utm_campaign=Badge_Grade)
+
+
 A command-line animation program (in the making!)
 
 ## Installation
