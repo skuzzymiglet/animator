@@ -1,5 +1,6 @@
 # animator
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/e06189dc6eed0e5b975b/maintainability)](https://codeclimate.com/github/skuzzymiglet/animator/maintainability)
 A command-line animation program (in the making!)
 
 ## Installation
