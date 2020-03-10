@@ -1,6 +1,7 @@
 # animator
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/e06189dc6eed0e5b975b/maintainability)](https://codeclimate.com/github/skuzzymiglet/animator/maintainability) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6c8327c1511843d1b9c62b635190a5fc)](https://www.codacy.com/manual/skuzzymiglet/animator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=skuzzymiglet/animator&amp;utm_campaign=Badge_Grade)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fskuzzymiglet%2Fanimator.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fskuzzymiglet%2Fanimator?ref=badge_shield)
 
 
 A command-line animation program (in the making!)
@@ -33,3 +34,7 @@ Your contribution is valuable!
 + subtitles
 
 Planning on adding overlays, interpolation, video imports, diffs and more, [it's all here](https://github.com/skuzzymiglet/animator/blob/master/spec.md)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fskuzzymiglet%2Fanimator.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fskuzzymiglet%2Fanimator?ref=badge_large)
